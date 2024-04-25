@@ -1,54 +1,38 @@
-﻿using Carting.Service.Configuration;
-using LiteDB;
+﻿using LiteDB;
 using Microsoft.Extensions.Options;
 
 namespace Carting.Service.DAL;
 
 public class CartDal : ICartDal
 {
-    private readonly IOptions<LiteDbConfiguration> _options;
+    private readonly CartingDBContext _cartingDBContext;
 
-    public CartDal(IOptions<LiteDbConfiguration> options)
+    public CartDal(CartingDBContext context)
     {
-        _options = options;
+        _cartingDBContext = context;
     }
 
     public IEnumerable<Product> GetCartItems(int cartId)
     {
-        using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Product>(TableNames.CartItems);
-        return collection.Find(item => item.ProductId == cartId).ToList();
+        return _cartingDBContext.Items.ToList();
     }
 
     public void Insert(Product item)
     {
-        using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Product>(TableNames.CartItems);
-        collection.Insert(item);
+        _cartingDBContext.Add(item);
+        _cartingDBContext.SaveChanges();
     }
 
     public void Update(Product item)
     {
-        using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Product>(TableNames.CartItems);
-        collection.Update(item);
+        _cartingDBContext.Update(item);
+        _cartingDBContext.SaveChanges();
     }
 
     public void Delete(Product item)
     {
-        using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Product>(TableNames.CartItems);
-        collection.DeleteMany(c => c.ProductId == item.ProductId & c.ProductId == item.ProductId);
+        _cartingDBContext.Remove(item);
+        _cartingDBContext.SaveChanges();
     }
 
-    public void Seed()
-    {
-        using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var cartItems = db.GetCollection<Product>(TableNames.CartItems);
-        
-        if (cartItems.Count() != 0)
-        {
-            cartItems.DeleteAll();
-        }
-    }
 }

@@ -9,7 +9,5 @@
         void Update(Product item);
 
         void Delete(Product item);
-
-        void Seed();
     }
 }

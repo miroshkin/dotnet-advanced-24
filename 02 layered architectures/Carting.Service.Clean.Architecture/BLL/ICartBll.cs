@@ -7,6 +7,4 @@ public interface ICartBll
     void AddItem(int cartId, Product item);
 
     void RemoveItem(int cartId, Product item);
-
-    void Seed();
 }

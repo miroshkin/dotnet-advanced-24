@@ -37,7 +37,7 @@ namespace Carting.Service.Controllers
         [HttpPatch(Name = "SeedItemsToCart")]
         public void SeedItems()
         {
-            _cartBll.Seed();
+            
         }
     }
 }

@@ -53,10 +53,5 @@ namespace Carting.Service.BLL
                 throw new CartItemRemoveException("You are trying to delete more items than exist now in the cart");
             }
         }
-
-        public void Seed()
-        {
-            _cartDal.Seed();
-        }
     }
 }
