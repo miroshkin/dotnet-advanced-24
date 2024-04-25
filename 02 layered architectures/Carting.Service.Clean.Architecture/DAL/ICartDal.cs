@@ -2,13 +2,13 @@
 {
     public interface ICartDal
     {
-        IEnumerable<Item> GetCartItems(int cartId);
+        IEnumerable<Product> GetCartItems(int cartId);
 
-        void Insert(Item item);
+        void Insert(Product item);
 
-        void Update(Item item);
+        void Update(Product item);
 
-        void Delete(Item item);
+        void Delete(Product item);
 
         void Seed();
     }

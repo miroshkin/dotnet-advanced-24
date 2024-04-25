@@ -11,37 +11,37 @@ namespace Carting.Service.BLL
             _cartDal = cartDal;
         }
 
-        public void AddItem(int cartId, Item item)
+        public void AddItem(int cartId, Product item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
-            var cartItem = cartItems.FirstOrDefault(i => i.Id == item.Id);
+            var cartItem = cartItems.FirstOrDefault(i => i.ProductId == item.ProductId);
             if (cartItem == null)
             {
-                item.CartId = cartId;
+                item.ProductId = cartId;
                 _cartDal.Insert(item);
             }
             else
             {
-                cartItem.Quantity += item.Quantity;
+                cartItem.Amount += item.Amount;
                 _cartDal.Update(cartItem);
             }
         }
 
-        public IEnumerable<Item> GetCartItems(int cartId)
+        public IEnumerable<Product> GetCartItems(int cartId)
         {
             return _cartDal.GetCartItems(cartId);
         }
 
-        public void RemoveItem(int cartId, Item item)
+        public void RemoveItem(int cartId, Product item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
             
-            var cartItem = cartItems.FirstOrDefault(i => i.Id == item.Id) ?? throw new CartItemHasNotBeenFoundException("Item has not been found");
+            var cartItem = cartItems.FirstOrDefault(i => i.ProductId == item.ProductId) ?? throw new CartItemHasNotBeenFoundException("Item has not been found");
 
-            if (cartItem.Quantity >= item.Quantity)
+            if (cartItem.Amount >= item.Amount)
             {
-                cartItem.Quantity -= item.Quantity;
-                if (cartItem.Quantity == 0)
+                cartItem.Amount -= item.Amount;
+                if (cartItem.Amount == 0)
                 {
                     _cartDal.Delete(cartItem);
                     return;

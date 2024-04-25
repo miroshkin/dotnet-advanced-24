@@ -13,54 +13,42 @@ public class CartDal : ICartDal
         _options = options;
     }
 
-    public IEnumerable<Item> GetCartItems(int cartId)
+    public IEnumerable<Product> GetCartItems(int cartId)
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Item>(TableNames.CartItems);
-        return collection.Find(item => item.CartId == cartId).ToList();
+        var collection = db.GetCollection<Product>(TableNames.CartItems);
+        return collection.Find(item => item.ProductId == cartId).ToList();
     }
 
-    public void Insert(Item item)
+    public void Insert(Product item)
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Item>(TableNames.CartItems);
+        var collection = db.GetCollection<Product>(TableNames.CartItems);
         collection.Insert(item);
     }
 
-    public void Update(Item item)
+    public void Update(Product item)
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Item>(TableNames.CartItems);
+        var collection = db.GetCollection<Product>(TableNames.CartItems);
         collection.Update(item);
     }
 
-    public void Delete(Item item)
+    public void Delete(Product item)
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var collection = db.GetCollection<Item>(TableNames.CartItems);
-        collection.DeleteMany(c => c.CartId == item.CartId & c.Id == item.Id);
+        var collection = db.GetCollection<Product>(TableNames.CartItems);
+        collection.DeleteMany(c => c.ProductId == item.ProductId & c.ProductId == item.ProductId);
     }
 
     public void Seed()
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        var cartItems = db.GetCollection<Item>(TableNames.CartItems);
+        var cartItems = db.GetCollection<Product>(TableNames.CartItems);
         
         if (cartItems.Count() != 0)
         {
             cartItems.DeleteAll();
         }
-
-        var initItems = new List<Item>(6)
-        {
-            new Item(){CartId = 1, Id = 1, Image = new Image(){AlternativeText = "AltText1", Url = "url1"}, Name = "Tomato", Price = 100, Quantity = 1},
-            new Item(){CartId = 1, Id = 2, Image = new Image(){AlternativeText = "AltText2", Url = "url2"}, Name = "Cucumber", Price = 200, Quantity = 2},
-            new Item(){CartId = 1, Id = 3, Image = new Image(){AlternativeText = "AltText3", Url = "url3"}, Name = "Banana", Price = 300, Quantity = 3},
-            new Item(){CartId = 2, Id = 4, Image = new Image(){AlternativeText = "AltText4", Url = "url4"}, Name = "Meat", Price = 400, Quantity = 4},
-            new Item(){CartId = 2, Id = 5, Image = new Image(){AlternativeText = "AltText5", Url = "url5"}, Name = "Milk", Price = 500, Quantity = 5},
-            new Item(){CartId = 2, Id = 6, Image = new Image(){AlternativeText = "AltText6", Url = "url6"}, Name = "Tomato", Price = 600, Quantity = 6},
-        };
-
-        initItems.ForEach(i => cartItems.Insert(i));
     }
 }

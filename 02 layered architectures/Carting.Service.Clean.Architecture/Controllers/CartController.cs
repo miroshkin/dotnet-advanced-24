@@ -17,19 +17,19 @@ namespace Carting.Service.Controllers
         }
 
         [HttpGet(Name = "GetCarts")]
-        public IEnumerable<Item> Get(int cartId)
+        public IEnumerable<Product> Get(int cartId)
         {
             return _cartBll.GetCartItems(cartId);
         }
 
         [HttpPost(Name = "AddItemToCart")]
-        public void AddItem(int cartId, Item item)
+        public void AddItem(int cartId, Product item)
         {
             _cartBll.AddItem(cartId, item);
         }
 
         [HttpDelete(Name = "RemoveItemFromCart")]
-        public void RemoveItem(int cartId, Item item)
+        public void RemoveItem(int cartId, Product item)
         {
             _cartBll.RemoveItem(cartId, item);
         }
