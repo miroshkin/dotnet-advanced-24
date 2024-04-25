@@ -9,6 +9,8 @@ public class Category
     public string Name { get; set; }
     
     public string Image { get; set; }
+
+    public int? ParentCategoryId { get; set; }
     
     public Category? ParentCategory { get; set; }
 }

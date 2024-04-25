@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Carting.Service
 {
@@ -15,9 +16,13 @@ namespace Carting.Service
         public string Image { get; set; }
 
         [Required]
-        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
 
         [Required]
+        public Category? Category { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         
         [Required]
