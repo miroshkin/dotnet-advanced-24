@@ -9,7 +9,7 @@ public class Category
     public string Name { get; set; }
 
     [MaxLength(500)] 
-    public string Image { get; set; }
+    public string? Image { get; set; }
 
     public int? ParentCategoryId { get; set; }
     

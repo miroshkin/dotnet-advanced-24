@@ -12,10 +12,10 @@ namespace Carting.Service
         public string Name { get; set; }
 
         [MaxLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [MaxLength(500)]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [Required]
         public int? CategoryId { get; set; }
