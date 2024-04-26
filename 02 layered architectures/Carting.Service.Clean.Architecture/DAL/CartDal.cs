@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using LiteDB;
 using Microsoft.Extensions.Options;
 
 namespace Carting.Service.DAL;
