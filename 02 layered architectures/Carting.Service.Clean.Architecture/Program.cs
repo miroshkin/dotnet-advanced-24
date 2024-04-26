@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICartDal, CartDal>();
 builder.Services.AddScoped<ICartBll, CartBll>();
 
-builder.Services.AddDbContext<CartingDBContext>(options =>
+builder.Services.AddDbContext<CatalogServiceDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();

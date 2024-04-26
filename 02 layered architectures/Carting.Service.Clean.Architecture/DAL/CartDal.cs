@@ -5,34 +5,34 @@ namespace Carting.Service.DAL;
 
 public class CartDal : ICartDal
 {
-    private readonly CartingDBContext _cartingDBContext;
+    private readonly CatalogServiceDbContext _catalogServiceDbContext;
 
-    public CartDal(CartingDBContext context)
+    public CartDal(CatalogServiceDbContext context)
     {
-        _cartingDBContext = context;
+        _catalogServiceDbContext = context;
     }
 
     public IEnumerable<Product> GetCartItems(int cartId)
     {
-        return _cartingDBContext.Items.ToList();
+        return _catalogServiceDbContext.Items.ToList();
     }
 
     public void Insert(Product item)
     {
-        _cartingDBContext.Add(item);
-        _cartingDBContext.SaveChanges();
+        _catalogServiceDbContext.Add(item);
+        _catalogServiceDbContext.SaveChanges();
     }
 
     public void Update(Product item)
     {
-        _cartingDBContext.Update(item);
-        _cartingDBContext.SaveChanges();
+        _catalogServiceDbContext.Update(item);
+        _catalogServiceDbContext.SaveChanges();
     }
 
     public void Delete(Product item)
     {
-        _cartingDBContext.Remove(item);
-        _cartingDBContext.SaveChanges();
+        _catalogServiceDbContext.Remove(item);
+        _catalogServiceDbContext.SaveChanges();
     }
 
 }

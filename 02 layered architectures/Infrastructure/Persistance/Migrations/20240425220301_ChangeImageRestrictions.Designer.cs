@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Carting.Service.Clean.Architecture.Migrations
 {
-    [DbContext(typeof(CartingDBContext))]
+    [DbContext(typeof(CatalogServiceDbContext))]
     [Migration("20240425220301_ChangeImageRestrictions")]
     partial class ChangeImageRestrictions
     {

@@ -2,9 +2,9 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-public class CartingDBContext : DbContext
+public class CatalogServiceDbContext : DbContext
 {
-    public CartingDBContext(DbContextOptions<CartingDBContext> options) : base(options)
+    public CatalogServiceDbContext(DbContextOptions<CatalogServiceDbContext> options) : base(options)
     {
     }
 

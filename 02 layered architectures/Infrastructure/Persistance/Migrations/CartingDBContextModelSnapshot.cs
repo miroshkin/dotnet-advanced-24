@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Carting.Service.Clean.Architecture.Migrations
 {
-    [DbContext(typeof(CartingDBContext))]
+    [DbContext(typeof(CatalogServiceDbContext))]
     partial class CartingDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
