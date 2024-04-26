@@ -1,4 +1,5 @@
 ﻿using Carting.Service.DAL;
+using Domain.Entities;
 
 namespace Carting.Service.BLL
 {

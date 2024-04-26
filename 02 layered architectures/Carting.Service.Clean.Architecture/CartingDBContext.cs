@@ -1,4 +1,5 @@
 ﻿using Carting.Service;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 public class CartingDBContext : DbContext

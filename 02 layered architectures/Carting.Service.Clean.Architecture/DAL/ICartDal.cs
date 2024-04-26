@@ -1,4 +1,6 @@
-﻿namespace Carting.Service.DAL
+﻿using Domain.Entities;
+
+namespace Carting.Service.DAL
 {
     public interface ICartDal
     {

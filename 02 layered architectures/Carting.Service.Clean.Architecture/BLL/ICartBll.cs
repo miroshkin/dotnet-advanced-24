@@ -1,4 +1,6 @@
-﻿namespace Carting.Service.BLL;
+﻿using Domain.Entities;
+
+namespace Carting.Service.BLL;
 
 public interface ICartBll
 {

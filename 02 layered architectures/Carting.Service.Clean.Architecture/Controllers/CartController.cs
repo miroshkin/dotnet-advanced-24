@@ -1,4 +1,5 @@
 using Carting.Service.BLL;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carting.Service.Controllers
