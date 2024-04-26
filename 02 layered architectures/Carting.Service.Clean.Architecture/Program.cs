@@ -1,5 +1,3 @@
-using Carting.Service.BLL;
-using Carting.Service.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -11,8 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICartDal, CartDal>();
-builder.Services.AddScoped<ICartBll, CartBll>();
 
 builder.Services.AddDbContext<CatalogServiceDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
