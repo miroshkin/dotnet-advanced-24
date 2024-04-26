@@ -1,4 +1,3 @@
-using Carting.Service.BLL;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,58 +7,62 @@ namespace Carting.Service.Clean.Architecture.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-        private readonly ILogger<CategoryController> _logger;
-        private readonly ICartBll _cartBll;
-        private readonly CatalogServiceDbContext _context; 
+        private readonly CatalogServiceDbContext _context;
 
-        public CategoryController(ILogger<CategoryController> logger, CatalogServiceDbContext context)
+        public CategoryController(CatalogServiceDbContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
-        [HttpGet(Name = "GetCategory")]
-        public Category GetCategory(int categoryId)
+        [HttpGet("{categoryId}", Name = "GetCategoryById")]
+        public ActionResult<Category> GetCategory(int categoryId)
         {
             var category = _context.Categories.FirstOrDefault(c => c.CategoryId == categoryId);
             if (category == null)
             {
-                throw new CategoryNotFoundException();
+                return NotFound(); // Return 404 if category is not found
             }
             return category;
         }
 
-        [HttpGet(Name = "GetCategories")]
-        public IEnumerable<Category> GetCategories()
+        [HttpGet(Name = "GetAllCategories")]
+        public ActionResult<IEnumerable<Category>> GetAllCategories()
         {
             var categories = _context.Categories.ToList();
-            return categories;
+            return Ok(categories); // Return 200 with the categories list
         }
 
         [HttpPost(Name = "AddCategory")]
-        public void AddCategory(Category category)
+        public ActionResult<Category> AddCategory(Category category)
         {
             _context.Add(category);
             _context.SaveChanges();
+            return CreatedAtRoute("GetCategoryById", new { categoryId = category.CategoryId }, category);
         }
 
-        [HttpDelete(Name = "DeleteCategory")]
-        public void RemoveCategory(int categoryId)
+        [HttpDelete("{categoryId}", Name = "DeleteCategory")]
+        public IActionResult RemoveCategory(int categoryId)
         {
             var category = _context.Categories.FirstOrDefault(c => c.CategoryId == categoryId);
             if (category == null)
             {
-                throw new CategoryNotFoundException();
+                return NotFound(); // Return 404 if category is not found
             }
             _context.Categories.Remove(category);
             _context.SaveChanges();
+            return NoContent(); // Return 204 for successful deletion
         }
 
-        [HttpPut(Name = "UpdateCategory")]
-        public void UpdateCategory(Category category)
+        [HttpPut("{categoryId}", Name = "UpdateCategory")]
+        public IActionResult UpdateCategory(int categoryId, Category category)
         {
+            if (categoryId != category.CategoryId)
+            {
+                return BadRequest(); // Return 400 for invalid request
+            }
             _context.Categories.Update(category);
             _context.SaveChanges();
+            return NoContent(); // Return 204 for successful update
         }
     }
 }
