@@ -9,5 +9,5 @@ public class CatalogServiceDbContext : DbContext
     }
 
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Product> Items { get; set; }
+    public DbSet<Product> Products { get; set; }
 }

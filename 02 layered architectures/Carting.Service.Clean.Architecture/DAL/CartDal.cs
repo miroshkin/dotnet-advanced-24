@@ -14,7 +14,7 @@ public class CartDal : ICartDal
 
     public IEnumerable<Product> GetCartItems(int cartId)
     {
-        return _catalogServiceDbContext.Items.ToList();
+        return _catalogServiceDbContext.Products.ToList();
     }
 
     public void Insert(Product item)
