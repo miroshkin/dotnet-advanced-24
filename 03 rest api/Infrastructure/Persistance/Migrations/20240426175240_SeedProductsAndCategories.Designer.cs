@@ -3,16 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Catalog.Service.Clean.Architecture.Migrations
+namespace Carting.Service.Clean.Architecture.Migrations
 {
     [DbContext(typeof(CatalogServiceDbContext))]
-    partial class CartingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240426175240_SeedProductsAndCategories")]
+    partial class SeedProductsAndCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

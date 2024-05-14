@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Catalog.Service.Clean.Architecture.Migrations
+namespace Carting.Service.Clean.Architecture.Migrations
 {
     /// <inheritdoc />
     public partial class SeedProductsAndCategories : Migration

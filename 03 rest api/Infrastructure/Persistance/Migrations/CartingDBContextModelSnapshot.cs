@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Catalog.Service.Clean.Architecture.Migrations
+namespace Carting.Service.Clean.Architecture.Migrations
 {
     [DbContext(typeof(CatalogServiceDbContext))]
     partial class CartingDBContextModelSnapshot : ModelSnapshot

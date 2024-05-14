@@ -3,16 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Catalog.Service.Clean.Architecture.Migrations
+namespace Carting.Service.Clean.Architecture.Migrations
 {
     [DbContext(typeof(CatalogServiceDbContext))]
-    partial class CartingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240426173200_RenameItemsToProducts")]
+    partial class RenameItemsToProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,41 +49,6 @@ namespace Catalog.Service.Clean.Architecture.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Image = "image1.jpg",
-                            Name = "Category 1"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Image = "image2.jpg",
-                            Name = "Category 2"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Image = "image3.jpg",
-                            Name = "Category 3",
-                            ParentCategoryId = 1
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Image = "image4.jpg",
-                            Name = "Category 4",
-                            ParentCategoryId = 1
-                        },
-                        new
-                        {
-                            CategoryId = 5,
-                            Image = "image5.jpg",
-                            Name = "Category 5",
-                            ParentCategoryId = 2
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -119,58 +87,6 @@ namespace Catalog.Service.Clean.Architecture.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            Amount = 10L,
-                            CategoryId = 1,
-                            Description = "Description of Product 1",
-                            Image = "image1.jpg",
-                            Name = "Product 1",
-                            Price = 19.99m
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            Amount = 5L,
-                            CategoryId = 2,
-                            Description = "Description of Product 2",
-                            Image = "image2.jpg",
-                            Name = "Product 2",
-                            Price = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            Amount = 15L,
-                            CategoryId = 3,
-                            Description = "Description of Product 3",
-                            Image = "image3.jpg",
-                            Name = "Product 3",
-                            Price = 39.99m
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            Amount = 8L,
-                            CategoryId = 2,
-                            Description = "Description of Product 4",
-                            Image = "image4.jpg",
-                            Name = "Product 4",
-                            Price = 49.99m
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            Amount = 12L,
-                            CategoryId = 1,
-                            Description = "Description of Product 5",
-                            Image = "image5.jpg",
-                            Name = "Product 5",
-                            Price = 59.99m
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>

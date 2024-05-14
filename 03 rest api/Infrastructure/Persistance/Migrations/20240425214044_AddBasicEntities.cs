@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Catalog.Service.Clean.Architecture.Migrations
+namespace Carting.Service.Clean.Architecture.Migrations
 {
     /// <inheritdoc />
     public partial class AddBasicEntities : Migration
