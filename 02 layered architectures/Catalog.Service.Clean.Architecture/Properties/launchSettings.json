@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Carting.Service": {
+    "Catalog.Service": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

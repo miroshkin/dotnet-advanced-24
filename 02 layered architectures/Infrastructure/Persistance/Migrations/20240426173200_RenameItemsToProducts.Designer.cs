@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Carting.Service.Clean.Architecture.Migrations
+namespace Catalog.Service.Clean.Architecture.Migrations
 {
     [DbContext(typeof(CatalogServiceDbContext))]
     [Migration("20240426173200_RenameItemsToProducts")]
