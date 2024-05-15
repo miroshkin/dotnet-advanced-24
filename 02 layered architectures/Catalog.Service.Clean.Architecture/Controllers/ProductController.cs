@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Carting.Service.Clean.Architecture.Controllers;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,13 +22,11 @@ public class ProductsController : ControllerBase
     {
         return await _context.Products.ToListAsync();
     }
-
-    // GET: api/Products
     [HttpGet]
     [Route("FilteringAndPagination")]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductsWithFilteringAndPagination(int? categoryId, int page, int pageSize)
     {
-        IQueryable<Product> query = _context.Products;
+        IQueryable<Product> query = _context.Products.Include(p => p.Category); // Include Category in the query
 
         // Apply filtering by category ID if provided
         if (categoryId.HasValue)
@@ -36,11 +35,39 @@ public class ProductsController : ControllerBase
         }
 
         // Apply pagination
-        var products = await query.Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var totalCount = await query.CountAsync();
+        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
-        return products;
+        var products = await query.Skip((page - 1) * pageSize)
+                                  .Take(pageSize)
+                                  .ToListAsync();
+
+        // Generate HATEOAS links for each product
+        var productDtos = new List<ProductDto>();
+        foreach (var product in products)
+        {
+            var productDto = new ProductDto
+            {
+                Id = product.ProductId,
+                Name = product.Name,
+                Price = product.Price,
+                // Add other properties as needed
+                Category = new LinkDto(Url.Link(nameof(CategoriesController.GetCategory), new { id = product.CategoryId }), "category", "GET") // Link to the category
+            };
+            productDtos.Add(productDto);
+        }
+
+        // Create the response object
+        var result = new
+        {
+            TotalCount = totalCount,
+            TotalPages = totalPages,
+            Page = page,
+            PageSize = pageSize,
+            Products = productDtos
+        };
+
+        return Ok(result);
     }
 
     // GET: api/Products/5

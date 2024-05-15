@@ -14,15 +14,16 @@ namespace Carting.Service.Clean.Architecture.Controllers
             _context = context;
         }
 
-        [HttpGet("{categoryId}", Name = "GetCategoryById")]
-        public ActionResult<Category> GetCategory(int categoryId)
+        [HttpGet]
+        [Route("{id}", Name = nameof(GetCategory))] // Define a route for getting a category by ID
+        public IActionResult GetCategory(int id)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.CategoryId == categoryId);
+            var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
-                return NotFound(); // Return 404 if category is not found
+                return NotFound();
             }
-            return category;
+            return Ok(category);
         }
 
         [HttpGet(Name = "GetAllCategories")]
