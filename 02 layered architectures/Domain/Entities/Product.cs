@@ -20,7 +20,6 @@ namespace Domain.Entities
         [Required]
         public int? CategoryId { get; set; }
 
-        [Required]
         public Category? Category { get; set; }
 
         [Required]
