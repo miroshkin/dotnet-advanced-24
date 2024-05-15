@@ -5,11 +5,11 @@ namespace Carting.Service.Clean.Architecture.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoryController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly CatalogServiceDbContext _context;
 
-        public CategoryController(CatalogServiceDbContext context)
+        public CategoriesController(CatalogServiceDbContext context)
         {
             _context = context;
         }

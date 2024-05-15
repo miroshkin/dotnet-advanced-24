@@ -5,17 +5,22 @@ namespace Carting.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CartController : ControllerBase
+    public class CartsController : ControllerBase
     {
-        private readonly ILogger<CartController> _logger;
+        private readonly ILogger<CartsController> _logger;
         private readonly ICartBll _cartBll;
 
-        public CartController(ILogger<CartController> logger, ICartBll cartBll)
+        public CartsController(ILogger<CartsController> logger, ICartBll cartBll)
         {
             _logger = logger;
             _cartBll = cartBll;
         }
 
+        /// <summary>
+        /// Gets cart by id
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         [HttpGet(Name = "GetCarts")]
         public IEnumerable<Item> Get(int cartId)
         {
