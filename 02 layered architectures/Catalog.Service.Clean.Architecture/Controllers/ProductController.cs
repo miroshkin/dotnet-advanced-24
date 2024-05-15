@@ -22,6 +22,27 @@ public class ProductsController : ControllerBase
         return await _context.Products.ToListAsync();
     }
 
+    // GET: api/Products
+    [HttpGet]
+    [Route("FilteringAndPagination")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsWithFilteringAndPagination(int? categoryId, int page, int pageSize)
+    {
+        IQueryable<Product> query = _context.Products;
+
+        // Apply filtering by category ID if provided
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == categoryId);
+        }
+
+        // Apply pagination
+        var products = await query.Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return products;
+    }
+
     // GET: api/Products/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProduct(int id)
