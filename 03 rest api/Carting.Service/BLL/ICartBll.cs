@@ -2,7 +2,7 @@
 
 public interface ICartBll
 {
-    IEnumerable<Item> GetCartItems(string cartId);
+    CartDto? GetCartInfo(string cartId);
 
     void AddItem(string cartId, Item item);
 

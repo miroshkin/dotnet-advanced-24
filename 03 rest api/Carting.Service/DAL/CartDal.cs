@@ -44,13 +44,16 @@ public class CartDal : ICartDal
     public void Seed()
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
-        db.DropCollection(TableNames.CartItems);
+        
         var cartItems = db.GetCollection<Item>(TableNames.CartItems);
         
         if (cartItems.Count() != 0)
         {
-            cartItems.DeleteAll();
+            db.DropCollection(TableNames.CartItems);
         }
+        
+        cartItems.EnsureIndex(x => x.CartId);
+        cartItems.EnsureIndex(x => x.Id);
 
         var initItems = new List<Item>(6)
         {

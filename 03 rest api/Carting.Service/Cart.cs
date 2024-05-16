@@ -4,7 +4,7 @@ namespace Carting.Service
 {
     public class Cart
     {
-        public int Id { get; set; }
+        public string CartId { get; set; }
 
         IEnumerable<Item> Items { get; set; }
     }

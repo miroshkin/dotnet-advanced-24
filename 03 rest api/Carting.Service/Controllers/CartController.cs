@@ -1,3 +1,4 @@
+using System.Net;
 using Carting.Service.BLL;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,16 +19,28 @@ namespace Carting.Service.Controllers
         }
 
         [HttpGet(Name = "GetCarts")]
-        public IEnumerable<Item> Get(string cartId)
+        public ActionResult<CartDto?> Get(string cartId)
         {
-            return _cartBll.GetCartItems(cartId);
+            var cartInfo =_cartBll.GetCartInfo(cartId);
+            if (cartInfo == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return cartInfo;
+            }
         }
 
         [HttpPost(Name = "AddItemToCart")]
-        public void AddItem(string cartId, Item item)
+        public ActionResult AddItem(string cartId, Item item)
         {
             _cartBll.AddItem(cartId, item);
+            return CreatedAtRoute("AddItemToCart", new { Id = item.Id }, item);
         }
+
+
+
 
         [HttpDelete(Name = "RemoveItemFromCart")]
         public void RemoveItem(string cartId, Item item)

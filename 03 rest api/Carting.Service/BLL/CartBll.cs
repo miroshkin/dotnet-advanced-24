@@ -27,9 +27,19 @@ namespace Carting.Service.BLL
             }
         }
 
-        public IEnumerable<Item> GetCartItems(string cartId)
+        public CartDto? GetCartInfo(string cartId)
         {
-            return _cartDal.GetCartItems(cartId);
+            var cartDtoItems = _cartDal.GetCartItems(cartId).Select(c => new ItemDto(){Id = c.Id, Image = c.Image, Name = c.Name, Price = c.Price, Quantity = c.Quantity}).ToList();
+            
+            if (cartDtoItems.Any())
+            {
+                var cartDto = new CartDto();
+                cartDto.CartId = cartId;
+                cartDto.Items = cartDtoItems;
+                return cartDto;
+            }
+
+            return null;
         }
 
         public void RemoveItem(string cartId, Item item)
