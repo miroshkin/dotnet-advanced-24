@@ -1,12 +1,13 @@
-using System.Net;
+using Asp.Versioning;
 using Carting.Service.BLL;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Carting.Service.Controllers
+namespace Carting.Service.Controllers.V2
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
+    [ApiVersion("2.0")]
     public class CartController : ControllerBase
     {
         private readonly ILogger<CartController> _logger;
