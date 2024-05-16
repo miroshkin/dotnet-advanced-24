@@ -19,17 +19,17 @@ namespace Carting.Service.Controllers.V2
             _cartBll = cartBll;
         }
 
-        [HttpGet(Name = "GetCarts")]
-        public ActionResult<CartDto?> Get(string cartId)
+        [HttpGet(Name = "GetCartInfo")]
+        public ActionResult<IEnumerable<Item>> Get(string cartId)
         {
-            var cartInfo =_cartBll.GetCartInfo(cartId);
-            if (cartInfo == null)
+            var cartItems =_cartBll.GetCartItems(cartId);
+            if (cartItems.Any())
             {
-                return NotFound();
+                return Ok(cartItems);
             }
             else
             {
-                return cartInfo;
+                return NotFound();
             }
         }
 

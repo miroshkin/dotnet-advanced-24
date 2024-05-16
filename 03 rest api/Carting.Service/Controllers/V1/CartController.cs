@@ -20,7 +20,7 @@ namespace Carting.Service.Controllers.V1
             _cartBll = cartBll;
         }
 
-        [HttpGet(Name = "GetCarts")]
+        [HttpGet(Name = "GetCartInfo")]
         public ActionResult<CartDto?> Get(string cartId)
         {
             var cartInfo = _cartBll.GetCartInfo(cartId);

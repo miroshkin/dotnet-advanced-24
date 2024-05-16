@@ -42,6 +42,11 @@ namespace Carting.Service.BLL
             return null;
         }
 
+        public IEnumerable<ItemDto> GetCartItems(string cartId)
+        {
+            return _cartDal.GetCartItems(cartId).Select(c => new ItemDto() { Id = c.Id, Image = c.Image, Name = c.Name, Price = c.Price, Quantity = c.Quantity }).ToList();
+        }
+
         public void RemoveItem(string cartId, Item item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
