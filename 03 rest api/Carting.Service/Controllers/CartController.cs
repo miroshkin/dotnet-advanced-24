@@ -35,17 +35,37 @@ namespace Carting.Service.Controllers
         [HttpPost(Name = "AddItemToCart")]
         public ActionResult AddItem(string cartId, Item item)
         {
-            _cartBll.AddItem(cartId, item);
-            return CreatedAtRoute("AddItemToCart", new { Id = item.Id }, item);
+            try
+            {
+                _cartBll.AddItem(cartId, item);
+                return new OkResult();
+            }
+            catch
+            {
+                return StatusCode(505);
+            }
         }
 
 
 
 
         [HttpDelete(Name = "RemoveItemFromCart")]
-        public void RemoveItem(string cartId, Item item)
+        public IActionResult RemoveItem(string cartId, Item item)
         {
-            _cartBll.RemoveItem(cartId, item);
+            try
+            {
+                _cartBll.RemoveItem(cartId, item);
+                return new OkResult();
+
+            }
+            catch (CartItemHasNotBeenFoundException)
+            {
+                return new NotFoundResult();
+            }
+            catch
+            {
+                return StatusCode(505);
+            }
         }
 
         [HttpPatch(Name = "SeedItemsToCart")]
