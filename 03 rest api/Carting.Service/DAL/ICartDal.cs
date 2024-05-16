@@ -2,7 +2,7 @@
 {
     public interface ICartDal
     {
-        IEnumerable<Item> GetCartItems(int cartId);
+        IEnumerable<Item> GetCartItems(string cartId);
 
         void Insert(Item item);
 

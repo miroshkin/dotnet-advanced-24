@@ -2,11 +2,11 @@
 
 public interface ICartBll
 {
-    IEnumerable<Item> GetCartItems(int cartId);
+    IEnumerable<Item> GetCartItems(string cartId);
 
-    void AddItem(int cartId, Item item);
+    void AddItem(string cartId, Item item);
 
-    void RemoveItem(int cartId, Item item);
+    void RemoveItem(string cartId, Item item);
 
     void Seed();
 }

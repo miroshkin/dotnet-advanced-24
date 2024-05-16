@@ -5,7 +5,7 @@ namespace Carting.Service
 {
     public class Item
     {
-        public int CartId { get; set; }
+        public string CartId { get; set; }
 
         [Required]
         public int Id { get; set; }

@@ -11,7 +11,7 @@ namespace Carting.Service.BLL
             _cartDal = cartDal;
         }
 
-        public void AddItem(int cartId, Item item)
+        public void AddItem(string cartId, Item item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
             var cartItem = cartItems.FirstOrDefault(i => i.Id == item.Id);
@@ -27,12 +27,12 @@ namespace Carting.Service.BLL
             }
         }
 
-        public IEnumerable<Item> GetCartItems(int cartId)
+        public IEnumerable<Item> GetCartItems(string cartId)
         {
             return _cartDal.GetCartItems(cartId);
         }
 
-        public void RemoveItem(int cartId, Item item)
+        public void RemoveItem(string cartId, Item item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
             
