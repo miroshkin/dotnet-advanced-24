@@ -20,6 +20,11 @@ namespace Carting.Service.Controllers.V1
             _cartBll = cartBll;
         }
 
+        /// <summary>
+        /// Gets cart info with cart id and items
+        /// </summary>
+        /// <param name="cartId">Guid - Unique identifier of a cart</param>
+        /// <returns></returns>
         [HttpGet(Name = "GetCartInfo")]
         public ActionResult<CartDto?> Get(string cartId)
         {
@@ -34,6 +39,12 @@ namespace Carting.Service.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Adds item to cart. If cart does not exist - creates it.
+        /// </summary>
+        /// <param name="cartId">Guid - Unique identifier of a cart</param>
+        /// <param name="item">Item to be added to the cart</param>
+        /// <returns></returns>
         [HttpPost(Name = "AddItemToCart")]
         public ActionResult AddItem(string cartId, Item item)
         {
@@ -50,7 +61,12 @@ namespace Carting.Service.Controllers.V1
 
 
 
-
+        /// <summary>
+        /// Deletes item from the specified cart
+        /// </summary>
+        /// <param name="cartId">Guid - Unique identifier of a cart</param>
+        /// <param name="item">Item to be deleted to the cart</param>
+        /// <returns></returns>
         [HttpDelete(Name = "RemoveItemFromCart")]
         public IActionResult RemoveItem(string cartId, Item item)
         {
@@ -70,6 +86,9 @@ namespace Carting.Service.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// Seeds the data into local database
+        /// </summary>
         [HttpPatch(Name = "SeedItemsToCart")]
         public void SeedItems()
         {

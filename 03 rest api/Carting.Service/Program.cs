@@ -1,3 +1,4 @@
+using System.Reflection;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Carting.Service;
@@ -31,7 +32,12 @@ builder.Services.AddApiVersioning(o =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(s =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    s.IncludeXmlComments(xmlPath);
+});
 builder.Services.ConfigureOptions<NamedSwaggerGenOptions>();
 //builder.Services.ConfigureOptions<NamedSwaggerGenOptions>();
 
