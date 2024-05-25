@@ -27,6 +27,8 @@ namespace Carting.Service.Controllers.V2
         [HttpGet(Name = "GetCartInfo")]
         public ActionResult<IEnumerable<Item>> Get(string cartId)
         {
+            //TODO Receive changes from rabbit mq here
+
             var cartItems =_cartBll.GetCartItems(cartId);
             if (cartItems.Any())
             {

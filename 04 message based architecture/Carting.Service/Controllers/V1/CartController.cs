@@ -28,6 +28,8 @@ namespace Carting.Service.Controllers.V1
         [HttpGet(Name = "GetCartInfo")]
         public ActionResult<CartDto?> Get(string cartId)
         {
+            //TODO Receive changes from rabbit mq here
+
             var cartInfo = _cartBll.GetCartInfo(cartId);
             if (cartInfo == null)
             {

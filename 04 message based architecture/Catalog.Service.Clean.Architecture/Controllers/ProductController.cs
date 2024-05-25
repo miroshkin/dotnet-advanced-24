@@ -61,6 +61,7 @@ public class ProductsController : ControllerBase
         try
         {
             await _context.SaveChangesAsync();
+            //TODO Send message to rabbit mq here
         }
         catch (DbUpdateConcurrencyException)
         {
