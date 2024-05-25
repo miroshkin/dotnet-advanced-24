@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Carting.Service.BLL;
+using Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carting.Service.Controllers.V2
@@ -28,6 +29,7 @@ namespace Carting.Service.Controllers.V2
         public ActionResult<IEnumerable<Item>> Get(string cartId)
         {
             //TODO Receive changes from rabbit mq here
+            RabbitMQHelper.ReceiveMessage("catalog_changes");
 
             var cartItems =_cartBll.GetCartItems(cartId);
             if (cartItems.Any())

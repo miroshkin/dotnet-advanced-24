@@ -4,6 +4,7 @@ using Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -62,6 +63,7 @@ public class ProductsController : ControllerBase
         {
             await _context.SaveChangesAsync();
             //TODO Send message to rabbit mq here
+            RabbitMQHelper.SendMessage("test message", "catalog_changes");
         }
         catch (DbUpdateConcurrencyException)
         {
