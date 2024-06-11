@@ -6,7 +6,7 @@ namespace Common
 {
     public static class RabbitMQHelper
     {
-        public static void ReceiveMessage(string queueName = "defaultQueue")
+        public static async Task<string> ReceiveMessage(string queueName = "defaultQueue")
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
@@ -17,18 +17,21 @@ namespace Common
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);
-
+                var tcs = new TaskCompletionSource<string>();
                 var consumer = new EventingBasicConsumer(channel);
                 consumer.Received += (model, ea) =>
                 {
                     var body = ea.Body.ToArray();
                     var message = Encoding.UTF8.GetString(body);
                     Console.WriteLine(" [x] Received {0}", message);
+                    tcs.SetResult(message);
                 };
 
                 channel.BasicConsume(queue: queueName,
                                      autoAck: true,
                                      consumer: consumer);
+
+                return await tcs.Task;
 
             }
         }
