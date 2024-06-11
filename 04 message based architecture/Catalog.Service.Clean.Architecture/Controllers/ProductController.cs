@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Newtonsoft.Json;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -62,8 +63,10 @@ public class ProductsController : ControllerBase
         try
         {
             await _context.SaveChangesAsync();
+
             //TODO Send message to rabbit mq here
-            RabbitMQHelper.SendMessage("test message", "catalog_changes");
+            var productJson = JsonConvert.SerializeObject(product);
+            RabbitMQHelper.SendMessage(productJson, "catalog_changes");
         }
         catch (DbUpdateConcurrencyException)
         {
