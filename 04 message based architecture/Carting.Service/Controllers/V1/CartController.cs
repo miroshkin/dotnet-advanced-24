@@ -1,8 +1,11 @@
+using System.Dynamic;
 using System.Net;
 using Asp.Versioning;
 using Carting.Service.BLL;
 using Common;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Carting.Service.Controllers.V1
 {
@@ -30,8 +33,6 @@ namespace Carting.Service.Controllers.V1
         public ActionResult<CartDto?> Get(string cartId)
         {
             //TODO Receive changes from rabbit mq here
-            RabbitMQHelper.ReceiveMessage("catalog_changes");
-
             var cartInfo = _cartBll.GetCartInfo(cartId);
             if (cartInfo == null)
             {
@@ -97,6 +98,17 @@ namespace Carting.Service.Controllers.V1
         public void SeedItems()
         {
             _cartBll.Seed();
+        }
+
+        /// <summary>
+        /// Seeds the data into local database
+        /// </summary>
+        [HttpPut(Name = "UpdateProductInCarts")]
+        public async Task UpdateProductInCarts()
+        {
+            var message = await RabbitMQHelper.ReceiveMessage("catalog_changes");
+            Product product = JsonConvert.DeserializeObject<Product>(message);
+            _cartBll.UpdateCarts(product);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Carting.Service.Configuration;
+using Domain.Entities;
 using LiteDB;
 using Microsoft.Extensions.Options;
 
@@ -18,6 +19,13 @@ public class CartDal : ICartDal
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         return collection.Find(item => item.CartId == cartId).ToList();
+    }
+
+    public IEnumerable<Item> GetCartItems(Product product)
+    {
+        using var db = new LiteDatabase(_options.Value.ConnectionString);
+        var collection = db.GetCollection<Item>(TableNames.CartItems);
+        return collection.Find(item => item.Name.ToUpper() == product.Name.ToUpper()).ToList();
     }
 
     public void Insert(Item item)

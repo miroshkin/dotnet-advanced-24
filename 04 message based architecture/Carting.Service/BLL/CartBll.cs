@@ -1,4 +1,5 @@
 ﻿using Carting.Service.DAL;
+using Domain.Entities;
 
 namespace Carting.Service.BLL
 {
@@ -72,6 +73,18 @@ namespace Carting.Service.BLL
         public void Seed()
         {
             _cartDal.Seed();
+        }
+
+        public void UpdateCarts(Product product)
+        {
+            var cartItems = _cartDal.GetCartItems(product);
+
+            foreach (var cartItem in cartItems)
+            {
+                cartItem.Name = product.Name;
+                cartItem.Price = product.Price;
+                _cartDal.Update(cartItem);
+            }
         }
     }
 }
