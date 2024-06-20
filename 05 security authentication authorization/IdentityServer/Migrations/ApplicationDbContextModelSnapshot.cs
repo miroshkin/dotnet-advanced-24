@@ -85,6 +85,40 @@ namespace IdentityServer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d3990e12-1489-4454-9c45-23ab5f9382a6",
+                            Email = "manager@domain.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER@DOMAIN.COM",
+                            NormalizedUserName = "MANAGER@DOMAIN.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELURYMUOAK0Fvpm/UVZGwBWWD25POKgvVeRP4d5PiXruzUCo8iBHdfUHODVLqNjU2A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ad566a9d-aade-4113-b653-1b32b903f6c6",
+                            TwoFactorEnabled = false,
+                            UserName = "manager@domain.com"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d3f2f502-9e1c-47d4-8004-2c42e99a4287",
+                            Email = "buyer@domain.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BUYER@DOMAIN.COM",
+                            NormalizedUserName = "BUYER@DOMAIN.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFrM4Wy96TA8OUKRzfsWig6mcytw2k5IeaBoja/pkCf3Fd9MapIWSmHjQO7gBJN59A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f3d3aaa8-5e8f-48d0-b714-846103703087",
+                            TwoFactorEnabled = false,
+                            UserName = "buyer@domain.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -116,13 +150,13 @@ namespace IdentityServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "919d2803-12df-48c8-bbe3-f212e68f9d27",
+                            Id = "1",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "ec52a5bf-7318-42d1-8558-64a4c4612f90",
+                            Id = "2",
                             Name = "Buyer",
                             NormalizedName = "BUYER"
                         });
@@ -213,6 +247,18 @@ namespace IdentityServer.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

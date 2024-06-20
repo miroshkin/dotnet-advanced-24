@@ -20,10 +20,42 @@ namespace IdentityServer.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             // Seed roles and permissions
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole { Name = "Manager", NormalizedName = "MANAGER" },
-                new IdentityRole { Name = "Buyer", NormalizedName = "BUYER" }
-            );
+            var managerRole = new IdentityRole { Id = "1", Name = "Manager", NormalizedName = "MANAGER" };
+            var buyerRole = new IdentityRole { Id = "2", Name = "Buyer", NormalizedName = "BUYER" };
+
+            builder.Entity<IdentityRole>().HasData(managerRole, buyerRole);
+
+            // Seed users
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            var managerUser = new ApplicationUser
+            {
+                Id = "1",
+                UserName = "manager@domain.com",
+                NormalizedUserName = "MANAGER@DOMAIN.COM",
+                Email = "manager@domain.com",
+                NormalizedEmail = "MANAGER@DOMAIN.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!")
+            };
+
+            var buyerUser = new ApplicationUser
+            {
+                Id = "2",
+                UserName = "buyer@domain.com",
+                NormalizedUserName = "BUYER@DOMAIN.COM",
+                Email = "buyer@domain.com",
+                NormalizedEmail = "BUYER@DOMAIN.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!")
+            };
+
+            builder.Entity<ApplicationUser>().HasData(managerUser, buyerUser);
+
+            // Assign roles to users
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string> { UserId = managerUser.Id, RoleId = managerRole.Id },
+                new IdentityUserRole<string> { UserId = buyerUser.Id, RoleId = buyerRole.Id });
         }
     }
 }
