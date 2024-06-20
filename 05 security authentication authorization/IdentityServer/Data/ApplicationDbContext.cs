@@ -1,6 +1,8 @@
 ﻿using IdentityServer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security;
 
 namespace IdentityServer.Data
 {
@@ -17,6 +19,11 @@ namespace IdentityServer.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            // Seed roles and permissions
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Manager", NormalizedName = "MANAGER" },
+                new IdentityRole { Name = "Buyer", NormalizedName = "BUYER" }
+            );
         }
     }
 }
