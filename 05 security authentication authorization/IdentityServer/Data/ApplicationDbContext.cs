@@ -56,6 +56,15 @@ namespace IdentityServer.Data
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string> { UserId = managerUser.Id, RoleId = managerRole.Id },
                 new IdentityUserRole<string> { UserId = buyerUser.Id, RoleId = buyerRole.Id });
+
+            // Seed claims
+            builder.Entity<IdentityRoleClaim<string>>().HasData(
+                new IdentityRoleClaim<string> { Id = 1, RoleId = managerRole.Id, ClaimType = "Permission", ClaimValue = "Read" },
+                new IdentityRoleClaim<string> { Id = 2, RoleId = managerRole.Id, ClaimType = "Permission", ClaimValue = "Create" },
+                new IdentityRoleClaim<string> { Id = 3, RoleId = managerRole.Id, ClaimType = "Permission", ClaimValue = "Update" },
+                new IdentityRoleClaim<string> { Id = 4, RoleId = managerRole.Id, ClaimType = "Permission", ClaimValue = "Delete" },
+                new IdentityRoleClaim<string> { Id = 5, RoleId = buyerRole.Id, ClaimType = "Permission", ClaimValue = "Read" }
+            );
         }
     }
 }
