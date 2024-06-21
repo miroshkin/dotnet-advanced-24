@@ -1,0 +1,11 @@
+﻿@model Domain.Entities.Category
+@{
+    ViewData["Title"] = "Catalog";
+    Layout = "_Layout";
+}
+
+<h1>Catalog</h1>
+<div>@Model.CategoryId</div>
+<div>@Model.Name</div>
+<div>@Model.Image</div>
+<div>@Model.ParentCategoryId</div>

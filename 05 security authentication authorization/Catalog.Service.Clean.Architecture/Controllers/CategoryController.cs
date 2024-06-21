@@ -6,7 +6,7 @@ namespace Catalog.Service.Clean.Architecture.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
 
     public class CategoryController : ControllerBase
     {
