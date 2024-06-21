@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Domain.Entities;
+using IdentityClient.Services;
+using IdentityModel.Client;
 using Newtonsoft.Json;
 
 namespace IdentityClient.Controllers
@@ -9,10 +11,12 @@ namespace IdentityClient.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITokenService _tokenService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ITokenService tokenService, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _tokenService = tokenService;
         }
 
         public IActionResult Index()
@@ -28,6 +32,9 @@ namespace IdentityClient.Controllers
         public async Task<IActionResult> Catalog()
         {
             using var client = new HttpClient();
+
+            var token = await _tokenService.GetToken("weatherapi.read");
+            client.SetBearerToken(token.AccessToken);
 
             var result = await client.GetAsync("https://localhost:7295/Category/1");
 
