@@ -1,10 +1,13 @@
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Service.Clean.Architecture.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
+
     public class CategoryController : ControllerBase
     {
         private readonly CatalogServiceDbContext _context;
