@@ -34,7 +34,13 @@ namespace IdentityClient.Controllers
             using var client = new HttpClient();
 
             var token = await _tokenService.GetToken("weatherapi.read");
-            client.SetBearerToken(token.AccessToken);
+            var refreshToken = token.RefreshToken;
+            var accessToken = token.AccessToken;
+
+            var isVerified = await _tokenService.VerifyToken(accessToken);
+            
+            
+            client.SetBearerToken(accessToken);
 
             var result = await client.GetAsync("https://localhost:7295/Category/1");
 
