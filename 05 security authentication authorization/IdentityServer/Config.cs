@@ -41,7 +41,7 @@ namespace IdentityServer
                 {
                     ClientId = "m2m.client",
                     ClientName = "Client Credentials Client",
-
+                    Claims = new List<ClientClaim>() {new ClientClaim("access", "read"), new ClientClaim("access", "write")},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 

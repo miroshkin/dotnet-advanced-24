@@ -24,6 +24,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         }
         );
 
+builder.Services.AddAuthorization((options) => {
+    options.AddPolicy("manager", policybuilder =>
+    {
+        policybuilder.RequireAuthenticatedUser();
+        policybuilder.RequireClaim("client_access", "read");
+        policybuilder.RequireClaim("client_access", "create");
+        policybuilder.RequireClaim("client_access", "delete");
+        policybuilder.RequireClaim("client_access", "update");
+    });
+    options.AddPolicy("buyer", policybuilder =>
+    {
+        policybuilder.RequireAuthenticatedUser();
+        policybuilder.RequireClaim("client_access", "read");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
