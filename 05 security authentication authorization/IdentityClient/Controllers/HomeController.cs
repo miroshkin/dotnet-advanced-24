@@ -33,7 +33,7 @@ namespace IdentityClient.Controllers
         {
             using var client = new HttpClient();
 
-            var token = await _tokenService.GetToken("weatherapi.read");
+            var token = await _tokenService.GetToken("catalogapi.read");
             var refreshToken = token.RefreshToken;
             var accessToken = token.AccessToken;
 

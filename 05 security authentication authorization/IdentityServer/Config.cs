@@ -18,9 +18,9 @@ namespace IdentityServer
 
         public static IEnumerable<ApiResource> ApiResources => new[]
         {
-            new ApiResource("weatherapi")
+            new ApiResource("catalogapi")
             {
-                Scopes = new List<string> {"weatherapi.read", "weatherapi.write"},
+                Scopes = new List<string> {"catalogapi.read", "catalogapi.write"},
                 ApiSecrets = new List<Secret> {new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256())},
                 UserClaims = new List<string> {"role"}
             }
@@ -29,8 +29,8 @@ namespace IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new[]
             {
-                new ApiScope("weatherapi.read"),
-                new ApiScope("weatherapi.write"),
+                new ApiScope("catalogapi.read"),
+                new ApiScope("catalogapi.write"),
             };
 
         public static IEnumerable<Client> Clients =>
@@ -45,7 +45,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
-                    AllowedScopes = { "weatherapi.read", "weatherapi.write" }
+                    AllowedScopes = { "catalogapi.read", "catalogapi.write" }
                 },
 
                 // interactive client using code flow + pkce
@@ -61,7 +61,7 @@ namespace IdentityServer
                     PostLogoutRedirectUris = { "https://localhost:12345/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "weatherapi.read" },
+                    AllowedScopes = { "openid", "profile", "catalogapi.read" },
                     RequirePkce = true,
                     RequireConsent = true,
                     AllowPlainTextPkce = false
