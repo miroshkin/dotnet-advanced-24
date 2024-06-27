@@ -39,9 +39,14 @@ namespace IdentityServer
                 // m2m client credentials flow client
                 new Client
                 {
-                    ClientId = "m2m.client",
+                    ClientId = "manager",
                     ClientName = "Client Credentials Client",
-                    Claims = new List<ClientClaim>() {new ClientClaim("access", "read"), new ClientClaim("access", "write")},
+                    Claims = new List<ClientClaim>() {
+                        new ClientClaim("access", "create"), 
+                        new ClientClaim("access", "read"), 
+                        new ClientClaim("access", "update"),
+                        new ClientClaim("access", "delete")
+                    },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
