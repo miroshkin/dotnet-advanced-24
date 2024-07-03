@@ -8,15 +8,15 @@ namespace Carting.Service
         public string CartId { get; set; }
 
         [Required]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public Image Image { get; set; }
 
         [Required]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         public int Quantity { get; set; } 
     }
