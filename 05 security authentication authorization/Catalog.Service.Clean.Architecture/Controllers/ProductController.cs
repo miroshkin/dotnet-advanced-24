@@ -8,101 +8,104 @@ using Common;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
-[Route("api/[controller]")]
-[ApiController]
-[Authorize]
-public class ProductsController : ControllerBase
+namespace Catalog.Service.Clean.Architecture.Controllers
 {
-    private readonly CatalogServiceDbContext _context;
-
-    public ProductsController(CatalogServiceDbContext context)
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class ProductsController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly CatalogServiceDbContext _context;
 
-    // GET: api/Products
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-    {
-        return await _context.Products.ToListAsync();
-    }
-
-    // GET: api/Products/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Product>> GetProduct(int id)
-    {
-        var product = await _context.Products.FindAsync(id);
-
-        if (product == null)
+        public ProductsController(CatalogServiceDbContext context)
         {
-            return NotFound();
+            _context = context;
         }
 
-        return product;
-    }
-
-    // POST: api/Products
-    [HttpPost]
-    public async Task<ActionResult<Product>> PostProduct(Product product)
-    {
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
-    }
-
-    // PUT: api/Products/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutProduct(int id, Product product)
-    {
-        if (id != product.ProductId)
+        // GET: api/Products
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return BadRequest();
+            return await _context.Products.ToListAsync();
         }
 
-        _context.Entry(product).State = EntityState.Modified;
-
-        try
+        // GET: api/Products/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            await _context.SaveChangesAsync();
+            var product = await _context.Products.FindAsync(id);
 
-            //TODO Send message to rabbit mq here
-            var productJson = JsonConvert.SerializeObject(product);
-            RabbitMQHelper.SendMessage(productJson, "catalog_changes");
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ProductExists(id))
+            if (product == null)
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+
+            return product;
         }
 
-        return NoContent();
-    }
-
-    // DELETE: api/Products/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProduct(int id)
-    {
-        var product = await _context.Products.FindAsync(id);
-        if (product == null)
+        // POST: api/Products
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            return NotFound();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
         }
 
-        _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
+        // PUT: api/Products/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProduct(int id, Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return BadRequest();
+            }
 
-        return NoContent();
-    }
+            _context.Entry(product).State = EntityState.Modified;
 
-    private bool ProductExists(int id)
-    {
-        return _context.Products.Any(e => e.ProductId == id);
+            try
+            {
+                await _context.SaveChangesAsync();
+
+                //TODO Send message to rabbit mq here
+                var productJson = JsonConvert.SerializeObject(product);
+                RabbitMQHelper.SendMessage(productJson, "catalog_changes");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/Products/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool ProductExists(int id)
+        {
+            return _context.Products.Any(e => e.ProductId == id);
+        }
     }
 }
