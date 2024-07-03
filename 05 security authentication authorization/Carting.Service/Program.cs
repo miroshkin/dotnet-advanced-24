@@ -39,7 +39,6 @@ builder.Services.AddSwaggerGen(s =>
     s.IncludeXmlComments(xmlPath);
 });
 builder.Services.ConfigureOptions<NamedSwaggerGenOptions>();
-//builder.Services.ConfigureOptions<NamedSwaggerGenOptions>();
 
 builder.Services.AddScoped<ICartDal, CartDal>();
 builder.Services.AddScoped<ICartBll, CartBll>();
