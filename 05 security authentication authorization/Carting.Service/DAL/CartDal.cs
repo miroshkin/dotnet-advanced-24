@@ -46,7 +46,7 @@ public class CartDal : ICartDal
     {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
-        collection.DeleteMany(c => c.CartId == item.CartId & c.Id == item.Id);
+        collection.DeleteMany(c => c.CartId == item.CartId && c.Id == item.Id);
     }
 
     public void Seed()
