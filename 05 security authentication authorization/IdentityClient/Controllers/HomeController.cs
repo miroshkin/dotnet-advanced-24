@@ -18,7 +18,7 @@ namespace IdentityClient.Controllers
         {
             _logger = logger;
             _tokenService = tokenService;
-            _httpClient = new HttpClient();
+            _httpClient ??= new HttpClient();
         }
 
         public IActionResult Index()
