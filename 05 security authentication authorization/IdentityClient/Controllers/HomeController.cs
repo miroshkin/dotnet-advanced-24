@@ -12,11 +12,13 @@ namespace IdentityClient.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITokenService _tokenService;
+        private static HttpClient? _httpClient;
 
         public HomeController(ITokenService tokenService, ILogger<HomeController> logger)
         {
             _logger = logger;
             _tokenService = tokenService;
+            _httpClient = new HttpClient();
         }
 
         public IActionResult Index()
@@ -31,18 +33,16 @@ namespace IdentityClient.Controllers
 
         public async Task<IActionResult> Catalog()
         {
-            using var client = new HttpClient();
-
             var token = await _tokenService.GetToken("catalogapi.read");
             var refreshToken = token.RefreshToken;
             var accessToken = token.AccessToken;
 
             var isVerified = await _tokenService.VerifyToken(accessToken);
-            
-            
-            client.SetBearerToken(accessToken);
 
-            var result = await client.GetAsync("https://localhost:7295/Category/1");
+
+            _httpClient.SetBearerToken(accessToken);
+
+            var result = await _httpClient.GetAsync("https://localhost:7295/Category/1");
 
             if (result.IsSuccessStatusCode)
             {
