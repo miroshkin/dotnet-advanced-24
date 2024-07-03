@@ -15,12 +15,10 @@ namespace Carting.Service.Controllers.V1
     [ApiVersion("1.0")]
     public class CartController : ControllerBase
     {
-        private readonly ILogger<CartController> _logger;
         private readonly ICartBll _cartBll;
 
         public CartController(ILogger<CartController> logger, ICartBll cartBll)
         {
-            _logger = logger;
             _cartBll = cartBll;
         }
 
