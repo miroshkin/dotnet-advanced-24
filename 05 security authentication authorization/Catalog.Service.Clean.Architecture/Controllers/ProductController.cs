@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Common;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using Infrastructure.Persistence;
 
 namespace Catalog.Service.Clean.Architecture.Controllers
 {
