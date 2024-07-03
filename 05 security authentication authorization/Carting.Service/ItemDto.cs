@@ -12,6 +12,6 @@ namespace Carting.Service
 
         public decimal? Price { get; set; }
 
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
     }
 }
