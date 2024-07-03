@@ -33,6 +33,7 @@ namespace IdentityClient.Controllers
 
         public async Task<IActionResult> Catalog()
         {
+            _logger.LogInformation("Receiving token...");
             var token = await _tokenService.GetToken("catalogapi.read");
             var refreshToken = token.RefreshToken;
             var accessToken = token.AccessToken;
@@ -46,6 +47,7 @@ namespace IdentityClient.Controllers
 
             if (result.IsSuccessStatusCode)
             {
+                _logger.LogInformation("Getting content with correct token");
                 var model = await result.Content.ReadAsStringAsync();
 
                 var data = JsonConvert.DeserializeObject<Category>(model);
