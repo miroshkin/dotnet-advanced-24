@@ -25,7 +25,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         }
         );
 
-builder.Services.AddAuthorization((options) => {
+builder.Services.AddAuthorization((options) =>
+{
     options.AddPolicy("manager", policybuilder =>
     {
         policybuilder.RequireAuthenticatedUser();

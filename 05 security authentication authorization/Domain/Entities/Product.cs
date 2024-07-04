@@ -26,8 +26,8 @@ namespace Domain.Entities
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
-        
+
         [Required]
-        public uint Amount { get; set; } 
+        public uint Amount { get; set; }
     }
 }

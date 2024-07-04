@@ -29,7 +29,7 @@ namespace Carting.Service.Controllers.V2
             //TODO Receive changes from rabbit mq here
             RabbitMQHelper.ReceiveMessage("catalog_changes");
 
-            var cartItems =_cartBll.GetCartItems(cartId);
+            var cartItems = _cartBll.GetCartItems(cartId);
             if (cartItems.Any())
             {
                 return Ok(cartItems);

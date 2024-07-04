@@ -42,8 +42,8 @@ namespace IdentityServer
                     ClientId = "manager",
                     ClientName = "Client Credentials Client",
                     Claims = new List<ClientClaim>() {
-                        new ClientClaim("access", "create"), 
-                        new ClientClaim("access", "read"), 
+                        new ClientClaim("access", "create"),
+                        new ClientClaim("access", "read"),
                         new ClientClaim("access", "update"),
                         new ClientClaim("access", "delete")
                     },

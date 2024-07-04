@@ -30,8 +30,8 @@ namespace Carting.Service.BLL
 
         public CartDto? GetCartInfo(string cartId)
         {
-            var cartDtoItems = _cartDal.GetCartItems(cartId).Select(c => new ItemDto(){Id = c.Id, Image = c.Image, Name = c.Name, Price = c.Price, Quantity = c.Quantity}).ToList();
-            
+            var cartDtoItems = _cartDal.GetCartItems(cartId).Select(c => new ItemDto() { Id = c.Id, Image = c.Image, Name = c.Name, Price = c.Price, Quantity = c.Quantity }).ToList();
+
             if (cartDtoItems.Any())
             {
                 var cartDto = new CartDto();
@@ -51,7 +51,7 @@ namespace Carting.Service.BLL
         public void RemoveItem(string cartId, Item item)
         {
             var cartItems = _cartDal.GetCartItems(cartId);
-            
+
             var cartItem = cartItems.FirstOrDefault(i => i.Id == item.Id) ?? throw new CartItemHasNotBeenFoundException("Item has not been found");
 
             if (cartItem.Quantity >= item.Quantity)

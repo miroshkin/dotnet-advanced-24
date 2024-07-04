@@ -1,9 +1,9 @@
-﻿using IdentityClient.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Domain.Entities;
+using IdentityClient.Models;
 using IdentityClient.Services;
 using IdentityModel.Client;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace IdentityClient.Controllers
