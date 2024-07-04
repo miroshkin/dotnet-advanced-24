@@ -7,10 +7,9 @@ namespace Carting.Service.Controllers.V2
     {
 
     [ApiController]
-    [Route("v{version:apiVersion}/[controller]")]
-    [ApiVersion("2.0")]
-    public class CartController : ControllerBase
-        {
+                [Route("v{version:apiVersion}/[controller]")]
+                            [ApiVersion("2.0")]
+    public class CartController : ControllerBase{
         private readonly ICartBll _cartBll;
 
         public CartController(ILogger<CartController> logger, ICartBll cartBll)
