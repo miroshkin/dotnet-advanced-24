@@ -2,9 +2,9 @@
 // See LICENSE in the project root for license information.
 
 namespace IdentityServer.Pages.Login
-{
-    public class ViewModel
     {
+    public class ViewModel
+        {
         public bool AllowRememberLogin { get; set; } = true;
         public bool EnableLocalLogin { get; set; } = true;
 
@@ -15,15 +15,15 @@ namespace IdentityServer.Pages.Login
         public string? ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
 
         public class ExternalProvider
-        {
-            public ExternalProvider(string authenticationScheme, string? displayName = null)
             {
+            public ExternalProvider(string authenticationScheme, string? displayName = null)
+                {
                 AuthenticationScheme = authenticationScheme;
                 DisplayName = displayName;
-            }
+                }
 
             public string? DisplayName { get; set; }
             public string AuthenticationScheme { get; set; }
+            }
         }
     }
-}

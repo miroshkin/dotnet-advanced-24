@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Carting.Service
-{
-    public class Item
     {
+    public class Item
+        {
         public string CartId { get; set; }
 
         [Required]
@@ -19,5 +19,5 @@ namespace Carting.Service
         public decimal? Price { get; set; }
 
         public int? Quantity { get; set; }
+        }
     }
-}

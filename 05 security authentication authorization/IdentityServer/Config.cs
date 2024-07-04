@@ -1,9 +1,9 @@
 ﻿using Duende.IdentityServer.Models;
 
 namespace IdentityServer
-{
-    public static class Config
     {
+    public static class Config
+        {
         public static IEnumerable<IdentityResource> IdentityResources =>
             new[]
             {
@@ -72,5 +72,5 @@ namespace IdentityServer
                     AllowPlainTextPkce = false
                 },
             };
+        }
     }
-}

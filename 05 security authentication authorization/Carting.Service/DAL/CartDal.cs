@@ -6,59 +6,59 @@ using Microsoft.Extensions.Options;
 namespace Carting.Service.DAL;
 
 public class CartDal : ICartDal
-{
+    {
     private readonly IOptions<LiteDbConfiguration> _options;
 
     public CartDal(IOptions<LiteDbConfiguration> options)
-    {
+        {
         _options = options;
-    }
+        }
 
     public IEnumerable<Item> GetCartItems(string cartId)
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         return collection.Find(item => item.CartId == cartId).ToList();
-    }
+        }
 
     public IEnumerable<Item> GetCartItems(Product product)
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         return collection.Find(item => item.Name.ToUpper() == product.Name.ToUpper()).ToList();
-    }
+        }
 
     public void Insert(Item item)
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         collection.Insert(item);
-    }
+        }
 
     public void Update(Item item)
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         collection.Update(item);
-    }
+        }
 
     public void Delete(Item item)
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
         var collection = db.GetCollection<Item>(TableNames.CartItems);
         collection.DeleteMany(c => c.CartId == item.CartId && c.Id == item.Id);
-    }
+        }
 
     public void Seed()
-    {
+        {
         using var db = new LiteDatabase(_options.Value.ConnectionString);
 
         var cartItems = db.GetCollection<Item>(TableNames.CartItems);
 
         if (cartItems.Count() != 0)
-        {
+            {
             db.DropCollection(TableNames.CartItems);
-        }
+            }
 
         cartItems.EnsureIndex(x => x.CartId);
         cartItems.EnsureIndex(x => x.Id);
@@ -74,5 +74,5 @@ public class CartDal : ICartDal
         };
 
         initItems.ForEach(i => cartItems.Insert(i));
+        }
     }
-}

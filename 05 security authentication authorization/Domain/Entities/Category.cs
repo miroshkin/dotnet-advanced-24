@@ -3,7 +3,7 @@
 namespace Domain.Entities;
 
 public class Category
-{
+    {
     public int CategoryId { get; set; }
 
     [Required]
@@ -16,4 +16,4 @@ public class Category
     public int? ParentCategoryId { get; set; }
 
     public Category? ParentCategory { get; set; }
-}
+    }

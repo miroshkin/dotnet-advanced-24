@@ -5,13 +5,13 @@
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace Carting.Service.Clean.Architecture.Migrations
-{
+    {
     /// <inheritdoc />
     public partial class SeedProductsAndCategories : Migration
-    {
+        {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryId", "Image", "Name", "ParentCategoryId" },
@@ -35,11 +35,11 @@ namespace Carting.Service.Clean.Architecture.Migrations
                     { 5, 12L, 1, "Description of Product 5", "image5.jpg", "Product 5", 59.99m },
                     { 3, 15L, 3, "Description of Product 3", "image3.jpg", "Product 3", 39.99m }
                 });
-        }
+            }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.DeleteData(
                 table: "Categories",
                 keyColumn: "CategoryId",
@@ -89,6 +89,6 @@ namespace Carting.Service.Clean.Architecture.Migrations
                 table: "Categories",
                 keyColumn: "CategoryId",
                 keyValue: 1);
+            }
         }
     }
-}

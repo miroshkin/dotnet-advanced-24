@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IdentityServer
-{
-    internal static class HostingExtensions
     {
-        public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+    internal static class HostingExtensions
         {
+        public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+            {
             builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -50,16 +50,16 @@ namespace IdentityServer
                 });
 
             return builder.Build();
-        }
+            }
 
         public static WebApplication ConfigurePipeline(this WebApplication app)
-        {
+            {
             app.UseSerilogRequestLogging();
 
             if (app.Environment.IsDevelopment())
-            {
+                {
                 app.UseDeveloperExceptionPage();
-            }
+                }
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -70,6 +70,6 @@ namespace IdentityServer
                 .RequireAuthorization();
 
             return app;
+            }
         }
     }
-}

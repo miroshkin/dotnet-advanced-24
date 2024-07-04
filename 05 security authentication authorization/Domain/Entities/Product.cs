@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
-{
-    public class Product
     {
+    public class Product
+        {
         public int ProductId { get; set; }
 
         [Required]
@@ -29,5 +29,5 @@ namespace Domain.Entities
 
         [Required]
         public uint Amount { get; set; }
+        }
     }
-}

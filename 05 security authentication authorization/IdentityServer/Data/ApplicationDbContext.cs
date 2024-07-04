@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.Data
-{
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+        {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-        }
+            {
+            }
 
         protected override void OnModelCreating(ModelBuilder builder)
-        {
+            {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
@@ -29,7 +29,7 @@ namespace IdentityServer.Data
             var hasher = new PasswordHasher<ApplicationUser>();
 
             var managerUser = new ApplicationUser
-            {
+                {
                 Id = "1",
                 UserName = "manager@domain.com",
                 NormalizedUserName = "MANAGER@DOMAIN.COM",
@@ -37,10 +37,10 @@ namespace IdentityServer.Data
                 NormalizedEmail = "MANAGER@DOMAIN.COM",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Password123!")
-            };
+                };
 
             var buyerUser = new ApplicationUser
-            {
+                {
                 Id = "2",
                 UserName = "buyer@domain.com",
                 NormalizedUserName = "BUYER@DOMAIN.COM",
@@ -48,7 +48,7 @@ namespace IdentityServer.Data
                 NormalizedEmail = "BUYER@DOMAIN.COM",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Password123!")
-            };
+                };
 
             builder.Entity<ApplicationUser>().HasData(managerUser, buyerUser);
 
@@ -65,6 +65,6 @@ namespace IdentityServer.Data
                 new IdentityRoleClaim<string> { Id = 4, RoleId = managerRole.Id, ClaimType = "Permission", ClaimValue = "Delete" },
                 new IdentityRoleClaim<string> { Id = 5, RoleId = buyerRole.Id, ClaimType = "Permission", ClaimValue = "Read" }
             );
+            }
         }
     }
-}

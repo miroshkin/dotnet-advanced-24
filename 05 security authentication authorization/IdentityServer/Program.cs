@@ -8,7 +8,7 @@ Log.Logger = new LoggerConfiguration()
 Log.Information("Starting up");
 
 try
-{
+    {
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog((ctx, lc) => lc
@@ -23,21 +23,21 @@ try
     // this seeding is only for the template to bootstrap the DB and users.
     // in production you will likely want a different approach.
     if (args.Contains("/seed"))
-    {
+        {
         Log.Information("Seeding database...");
         SeedData.EnsureSeedData(app);
         Log.Information("Done seeding database. Exiting.");
         return;
-    }
+        }
 
     app.Run();
-}
+    }
 catch (Exception ex) when (ex is not HostAbortedException)
-{
+    {
     Log.Fatal(ex, "Unhandled exception");
-}
+    }
 finally
-{
+    {
     Log.Information("Shut down complete");
     Log.CloseAndFlush();
-}
+    }

@@ -3,13 +3,13 @@
 #nullable disable
 
 namespace Carting.Service.Clean.Architecture.Migrations
-{
+    {
     /// <inheritdoc />
     public partial class ChangeImageRestrictions : Migration
-    {
+        {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.AlterColumn<string>(
                 name: "Image",
                 table: "Items",
@@ -39,11 +39,11 @@ namespace Carting.Service.Clean.Architecture.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(500)",
                 oldMaxLength: 500);
-        }
+            }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.AlterColumn<string>(
                 name: "Image",
                 table: "Items",
@@ -79,6 +79,6 @@ namespace Carting.Service.Clean.Architecture.Migrations
                 oldType: "nvarchar(500)",
                 oldMaxLength: 500,
                 oldNullable: true);
+            }
         }
     }
-}

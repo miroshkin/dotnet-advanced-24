@@ -5,13 +5,13 @@
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace IdentityServer.Migrations
-{
+    {
     /// <inheritdoc />
     public partial class AddUserAndRoles : Migration
-    {
+        {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
@@ -48,11 +48,11 @@ namespace IdentityServer.Migrations
                     { "1", "1" },
                     { "2", "2" }
                 });
-        }
+            }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
@@ -91,6 +91,6 @@ namespace IdentityServer.Migrations
                     { "919d2803-12df-48c8-bbe3-f212e68f9d27", null, "Manager", "MANAGER" },
                     { "ec52a5bf-7318-42d1-8558-64a4c4612f90", null, "Buyer", "BUYER" }
                 });
+            }
         }
     }
-}

@@ -51,18 +51,18 @@ var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>()
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
+    {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         foreach (var description in provider.ApiVersionDescriptions)
-        {
+            {
             options.SwaggerEndpoint(
                 $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-        }
+            }
     });
-}
+    }
 
 app.UseHttpsRedirection();
 

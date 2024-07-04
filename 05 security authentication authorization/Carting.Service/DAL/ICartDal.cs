@@ -1,9 +1,9 @@
 ﻿using Domain.Entities;
 
 namespace Carting.Service.DAL
-{
-    public interface ICartDal
     {
+    public interface ICartDal
+        {
         IEnumerable<Item> GetCartItems(string cartId);
 
         public IEnumerable<Item> GetCartItems(Product product);
@@ -15,5 +15,5 @@ namespace Carting.Service.DAL
         void Delete(Item item);
 
         void Seed();
+        }
     }
-}

@@ -5,13 +5,13 @@
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace IdentityServer.Migrations
-{
+    {
     /// <inheritdoc />
     public partial class AddClaims : Migration
-    {
+        {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.InsertData(
                 table: "AspNetRoleClaims",
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
@@ -37,11 +37,11 @@ namespace IdentityServer.Migrations
                 keyValue: "2",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
                 values: new object[] { "e8129dac-b606-40ac-b0f2-29370edb96f0", "AQAAAAIAAYagAAAAECTndl4RRMWRDYt0DBR46PgBomkm2zym28Tak0XavVzdRk+iPWtkOR3tKwaJSxWt+w==", "737e1eb6-dd69-4f0a-8b18-98f8ccdda8fe" });
-        }
+            }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+            {
             migrationBuilder.DeleteData(
                 table: "AspNetRoleClaims",
                 keyColumn: "Id",
@@ -80,6 +80,6 @@ namespace IdentityServer.Migrations
                 keyValue: "2",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
                 values: new object[] { "d3f2f502-9e1c-47d4-8004-2c42e99a4287", "AQAAAAIAAYagAAAAEFrM4Wy96TA8OUKRzfsWig6mcytw2k5IeaBoja/pkCf3Fd9MapIWSmHjQO7gBJN59A==", "f3d3aaa8-5e8f-48d0-b714-846103703087" });
+            }
         }
     }
-}
