@@ -83,6 +83,7 @@ namespace Carting.Service.BLL
             {
                 cartItem.Name = product.Name;
                 cartItem.Price = product.Price;
+                cartItem.Image.Url = product.Image ?? "";
                 _cartDal.Update(cartItem);
             }
         }

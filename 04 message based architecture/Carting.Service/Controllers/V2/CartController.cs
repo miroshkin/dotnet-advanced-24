@@ -26,13 +26,13 @@ namespace Carting.Service.Controllers.V2
         /// <param name="cartId">Guid - Unique identifier of a cart</param>
         /// <returns></returns>
         [HttpGet(Name = "GetCartInfo")]
-        public ActionResult<IEnumerable<Item>> Get(string cartId)
+        public async Task<ActionResult<IEnumerable<Item>>> Get(string cartId)
         {
             //TODO Receive changes from rabbit mq here
-            RabbitMQHelper.ReceiveMessage("catalog_changes");
+            await RabbitMQHelper.ReceiveMessage("catalog_changes");
 
             var cartItems =_cartBll.GetCartItems(cartId);
-            if (cartItems.Any())
+            if (cartItems != null && cartItems.Any())
             {
                 return Ok(cartItems);
             }
