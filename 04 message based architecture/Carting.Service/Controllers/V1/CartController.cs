@@ -101,7 +101,7 @@ namespace Carting.Service.Controllers.V1
         }
 
         /// <summary>
-        /// Seeds the data into local database
+        /// Update data using message from Rabbit MQ
         /// </summary>
         [HttpPut(Name = "UpdateProductInCarts")]
         public async Task UpdateProductInCarts()
